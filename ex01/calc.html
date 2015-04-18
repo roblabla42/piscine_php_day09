@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF8">
+    <title>Calculator</title>
+    <script>
+function isNumber(n) {
+  return !isNaN(parseInt(n)) && isFinite(n) && parseInt(n) >= 0;
+}
+function result(str)
+{
+  console.log(str);
+  alert(str);
+}
+window.onload = function()
+{
+  setInterval(function() {
+    alert("Please use me...");
+  }, 30 * 1000);
+  document.getElementById("leform").onsubmit = function(form)
+  {
+    form.preventDefault();
+    var leftParam = document.getElementById("leftparam").value;
+    var rightParam = document.getElementById("rightparam").value;
+    var op = document.getElementById("op").value;
+    if (!isNumber(leftParam) || !isNumber(rightParam))
+    {
+      alert("Error :(");
+      return false;
+    }
+    leftParam = parseInt(leftParam);
+    rightParam = parseInt(rightParam);
+    switch(op)
+    {
+      case "+":
+        result(leftParam + rightParam);
+        break;
+      case "-":
+        result(leftParam - rightParam);
+        break;
+      case "*":
+        result(leftParam * rightParam);
+        break;
+      case "/":
+        result(rightParam == 0 ? "It's over 9000!" : leftParam / rightParam);
+        break;
+      case "%":
+        result(rightParam == 0 ? "It's over 9000!" : leftParam % rightParam);
+        break;
+      default:
+        alert("Error :(");
+        break;
+    }
+    return false;
+  }
+}
+    </script>
+  </head>
+  <body>
+    <form id="leform">
+      <input id="leftparam" name="leftparam" type="text">
+      <select id="op" name="op">
+        <option>+</option>
+        <option>-</option>
+        <option>*</option>
+        <option>/</option>
+        <option>%</option>
+      </select>
+      <input id="rightparam" name="rightparam" type="text">
+      <input name="submit" type="submit" value="Try me!">
+    </form>
+  </body>
+</html>

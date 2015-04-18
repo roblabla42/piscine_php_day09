@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF8">
+    <title>Balloon!</title>
+    <style>
+#ballon {
+  width: 200px;
+  height: 200px;
+  border-radius: 200px;
+}
+.red {
+  background-color: red;
+}
+.blue {
+  background-color: blue;
+}
+.green {
+  background-color: green;
+}
+    </style>
+    <script src="//code.jquery.com/jquery-1.11.0.min.js"></script>
+    <script>
+function switchColor(curCol, colors)
+{
+  var i = 0;
+  while (i < colors.length && colors[i] != curCol)
+    i++;
+  i = (i + 1) % colors.length;
+  return (colors[i]);
+}
+$(document).ready(function() {
+  $("#ballon").click(function() {
+    var curColor = $("#ballon").hasClass("red") ? "red" : ($("#ballon").hasClass("green") ? "green" : "blue");
+    var newColor = switchColor(curColor, ["red", "green", "blue"]);
+    $("#ballon").removeClass(curColor);
+    $("#ballon").addClass(newColor);
+    if ($("#ballon").height() > 420)
+    {
+      $("#ballon").height("200px");
+      $("#ballon").width("200px");
+      $("#ballon").css("border-radius", "200px");
+    }
+    $("#ballon").height($("#ballon").height() + 10 + "px");
+    $("#ballon").width($("#ballon").width() + 10 + "px");
+    $("#ballon").css("border-radius", $("#ballon").height() + "px");
+  });
+  $("#ballon").mouseout(function() {
+    if ($("#ballon").height() >= 205)
+    {
+      var curColor = $("#ballon").hasClass("red") ? "red" : ($("#ballon").hasClass("green") ? "green" : "blue");
+      var newColor = switchColor(curColor, ["blue", "green", "red"]);
+      $("#ballon").removeClass(curColor);
+      $("#ballon").addClass(newColor);
+      $("#ballon").height($("#ballon").height() - 5 + "px");
+      $("#ballon").width($("#ballon").width() - 5 + "px");
+      $("#ballon").css("border-radius", $("#ballon").height() + "px");
+    }
+  });
+});
+    </script>
+  </head>
+  <body>
+    <div class="red" id="ballon"></div>
+  </body>
+</html>

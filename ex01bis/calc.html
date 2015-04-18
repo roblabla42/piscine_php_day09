@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF8">
+    <title>Calculator</title>
+    <script src="//code.jquery.com/jquery-1.11.0.min.js"></script>
+    <script>
+function isNumber(n) {
+  return !isNaN(parseInt(n)) && isFinite(n) && parseInt(n) >= 0;
+}
+function result(str)
+{
+  console.log(str);
+  alert(str);
+}
+$(document).ready(function()
+{
+  setInterval(function() {
+    alert("Please use me...");
+  }, 30 * 1000);
+  $("#leform").submit(function(form)
+  {
+    form.preventDefault();
+    var leftParam = $("#leftparam").val();
+    var rightParam = $("#rightparam").val();
+    var op = $("#op").val();
+    if (!isNumber(leftParam) || !isNumber(rightParam))
+    {
+      alert("Error :(");
+      return false;
+    }
+    leftParam = parseInt(leftParam);
+    rightParam = parseInt(rightParam);
+    switch(op)
+    {
+      case "+":
+        result(leftParam + rightParam);
+        break;
+      case "-":
+        result(leftParam - rightParam);
+        break;
+      case "*":
+        result(leftParam * rightParam);
+        break;
+      case "/":
+        result(rightParam == 0 ? "It's over 9000!" : leftParam / rightParam);
+        break;
+      case "%":
+        result(rightParam == 0 ? "It's over 9000!" : leftParam % rightParam);
+        break;
+      default:
+        alert("Error :(");
+        break;
+    }
+    return false;
+  });
+});
+    </script>
+  </head>
+  <body>
+    <form id="leform">
+      <input id="leftparam" name="leftparam" type="text">
+      <select id="op" name="op">
+        <option>+</option>
+        <option>-</option>
+        <option>*</option>
+        <option>/</option>
+        <option>%</option>
+      </select>
+      <input id="rightparam" name="rightparam" type="text">
+      <input name="submit" type="submit" value="Try me!">
+    </form>
+  </body>
+</html>
